@@ -1,5 +1,7 @@
 package vendor
 
+import library.File
+
 /**
   * Created by aworton on 16/02/17.
   */
@@ -12,6 +14,7 @@ class vendorParser extends ProgramParser{
     * @return an instruction list
     */
   override def parse(file: String): InstructionList = {
+    File.getLines(file)
     Vector()
   }
 
