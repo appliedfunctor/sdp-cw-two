@@ -22,4 +22,14 @@ class PublicVendorParserSuite extends FunSuite {
       assert(insts(i).name == all(i))
     }
   }
+
+  test("throws an IllegalArgumentException when given an empty file/line"){
+    assertThrows[IllegalArgumentException]{
+      vp.parse("programs/p07.vm")
+    }
+  }
+
+  test("throw an exception if more than one int argument is given"){
+
+  }
 }
