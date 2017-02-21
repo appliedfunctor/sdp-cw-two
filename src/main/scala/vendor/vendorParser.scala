@@ -44,6 +44,7 @@ class vendorParser extends ProgramParser{
     dividedLine match {
       case dl:Array[String] if(dl.length == 1) => Tuple2(dl(0), " ")
       case dl:Array[String] if(dl.length == 2) => Tuple2(dl(0), dl(1))
+      case dl:Array[String] if(dl.length > 2) => throw new IllegalArgumentException
     }
   }
 

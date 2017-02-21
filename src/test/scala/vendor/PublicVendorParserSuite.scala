@@ -31,7 +31,7 @@ class PublicVendorParserSuite extends FunSuite {
 
   test("throw an exception if more than one int argument is given"){
     assertThrows[IllegalArgumentException]{
-      vp.parse("programs/p05.vm")
+      vp.parse("programs/p06.vm")
     }
 
   }
