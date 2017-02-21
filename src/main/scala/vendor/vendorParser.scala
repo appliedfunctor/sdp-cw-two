@@ -14,10 +14,16 @@ class vendorParser extends ProgramParser{
     * @return an instruction list
     */
   override def parse(file: String): InstructionList = {
-    File.getLines(file).map(line => {
-      val arguments = lineDivider(line)
-      instructionMaker(arguments)
-    }).toVector
+    val wholeFile = File.getLines(file)
+    if(wholeFile.length == 1 && wholeFile(0) == "") {
+      throw new IllegalArgumentException
+    }
+
+    wholeFile
+      .map(line => {
+        val arguments = lineDivider(line)
+        instructionMaker(arguments)
+      }).toVector
   }
 
   /**
@@ -34,12 +40,10 @@ class vendorParser extends ProgramParser{
   def lineDivider(line: String): Tuple2[String, String] = {
 
     val dividedLine = line.split(" ")
-    if(dividedLine.length == 1){
-      Tuple2(dividedLine(0), " ")
-    } else if (dividedLine.length == 2){
-      Tuple2(dividedLine(0), dividedLine(1))
-    } else {
-      throw new IllegalArgumentException
+
+    dividedLine match {
+      case dl:Array[String] if(dl.length == 1) => Tuple2(dl(0), " ")
+      case dl:Array[String] if(dl.length == 2) => Tuple2(dl(0), dl(1))
     }
   }
 
