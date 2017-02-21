@@ -24,10 +24,11 @@ class vendorParser extends ProgramParser{
     }
 
     val instructionVector = instructions
-      .map(line => {
-        val arguments = lineDivider(line)
-        instructionMaker(arguments)
-      }).toVector
+        .filter(line => line != "")
+        .map(line => {
+          val arguments = lineDivider(line)
+          instructionMaker(arguments)
+        }).toVector
     instructionVector
   }
 

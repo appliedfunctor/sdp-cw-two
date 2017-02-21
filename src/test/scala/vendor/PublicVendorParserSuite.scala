@@ -11,6 +11,23 @@ class PublicVendorParserSuite extends FunSuite {
     assert(insts.length == 4)
   }
 
+  test("Should throw an IllegalArgumentException if passed an empty string"){
+    assertThrows[IllegalArgumentException]{
+      vp.parseString("")
+    }
+  }
+
+  test("Should throw an IllegalArgumentException if passed a string with 2 ints as an argument for iConst"){
+    assertThrows[IllegalArgumentException]{
+      vp.parseString("iconst 4 5\niconst 5 7\niadd\nprint")
+    }
+  }
+
+  test("Should ignore a blank line in an instruction sequence"){
+    val insts = vp.parseString("iconst 4\n\niconst 5\niadd\nprint")
+    assert(insts.length == 4)
+  }
+
   test("[4] vendor parser should parse a program file correctly") {
     val insts = vp.parse("programs/p03.vm")
     assert(insts.length == 20)
