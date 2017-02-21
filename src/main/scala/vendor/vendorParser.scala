@@ -18,6 +18,13 @@ class vendorParser extends ProgramParser{
     processInstructions(instructions)
   }
 
+  /**
+    * Check that instruction is valid (has length and isn't blank)
+    * filter out empty instructions
+    * extract arguments and produce instructions from data
+    * @param instructions a list of input instructions
+    * @return a vector of instantiated instructions
+    */
   private def processInstructions(instructions: List[String]): Vector[Instruction] = {
     if (instructions.length == 1 && instructions(0) == "") {
       throw new IllegalArgumentException
@@ -45,23 +52,46 @@ class vendorParser extends ProgramParser{
     instructionVectors
   }
 
-  def lineDivider(line: String): Tuple2[String, String] = {
-
+  /**
+    * line to instruction and argument converter
+    * @param line the input line as a string
+    * @return a tuple containing a string for the instruction and a string for the argument
+    */
+  def lineDivider(line: String): Tuple2[String, Option[String]] = {
     val dividedLine = line.split(" ")
 
     dividedLine match {
-      case dl:Array[String] if(dl.length == 1) => Tuple2(dl(0), " ")
-      case dl:Array[String] if(dl.length == 2) => Tuple2(dl(0), dl(1))
+      case dl:Array[String] if(dl.length == 1) => Tuple2(dl(0), None)
+      case dl:Array[String] if(dl.length == 2) => Tuple2(dl(0), Some(dl(1)))
       case dl:Array[String] if(dl.length > 2) => throw new IllegalArgumentException
     }
   }
 
-  def instructionMaker(args: Tuple2[String, String]):Instruction = {
-    if(args._2 == " ")
-    {
-      new Instruction((args._1), Vector[Int](0))
-    } else {
-      new Instruction(args._1, Vector(args._2.toInt))
+  /**
+    * Produce instructions from a pair of instruction, optional argument tuple
+    * @param instructionArgumentPair
+    * @return
+    */
+  def instructionMaker(instructionArgumentPair: Tuple2[String, Option[String]]):Instruction = {
+    val instructionName = instructionArgumentPair._1
+    var argument = Vector[Int](0)
+    if(instructionArgumentPair._2 != None){
+        argument = Vector(tryToParseArgumentToInt(instructionArgumentPair._2.get))
+    }
+    new Instruction(instructionName, argument)
+  }
+
+  /**
+    * attempt to parse argument to int, throw IllegalArgumentException if fails
+    * @param arg the string value to parse
+    * @return the parsed int value
+    */
+  def tryToParseArgumentToInt(arg: String): Int ={
+    try {
+      arg.toInt
+    }
+    catch{
+      case e: NumberFormatException => throw new IllegalArgumentException()
     }
   }
 

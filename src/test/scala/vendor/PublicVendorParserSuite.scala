@@ -42,8 +42,15 @@ class PublicVendorParserSuite extends FunSuite {
 
   test("throws an IllegalArgumentException when given an empty file/line"){
     assertThrows[IllegalArgumentException]{
-      vp.parse("programs/p07.vm")
+      vp.parse("programs/p07-blank-file.vm")
     }
+  }
+
+  test("throws an IllegalArgumentException if argument is not a number"){
+    val caught = intercept[IllegalArgumentException]{
+      vp.parse("programs/p08-argument-type-wrong.vm")
+    }
+    assert(caught.leftSide.toString == (new IllegalArgumentException).leftSide.toString)
   }
 
   test("throw an exception if more than one int argument is given"){
