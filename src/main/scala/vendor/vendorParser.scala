@@ -1,6 +1,6 @@
 package vendor
 
-import library.{File}
+import library.File
 
 /**
   * Created by aworton on 16/02/17.

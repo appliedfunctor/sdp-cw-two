@@ -49,11 +49,5 @@ trait ByteCode extends ByteCodeValues {
     */
   val code: Byte
 
-  /**
-    * Returns a new [[VirtualMachine]] after executing this bytecode operation.
-    *
-    * @param vm the initial virtual machine
-    * @return a new virtual machine
-    */
   def execute(vm: VirtualMachine): VirtualMachine
 }
