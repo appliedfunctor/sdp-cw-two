@@ -13,17 +13,19 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
 
   override def make(byte: Byte, args: Int*): ByteCode = {
     val name = bytecode.find(pair => pair._2 == byte).map(pair => pair._1).getOrElse("")
-    if(name == "") {
-      throw new InvalidBytecodeException("Byte code not known")
-    }
+    testName(name)
     argsCheck(name, args:_*)
     args.toArray.asInstanceOf[AnyRef]
     if(name != "iconst") {
-      println(name)
       Class.forName(getClassName(name)).getConstructors()(0).newInstance().asInstanceOf[ByteCode]
     } else {
-      println(name)
       Class.forName(getClassName(name)).getConstructors()(0).newInstance(args(0).asInstanceOf[AnyRef]).asInstanceOf[ByteCode]
+    }
+  }
+
+  private def testName(name: String) = {
+    if (name == "") {
+      throw new InvalidBytecodeException("Byte code not known")
     }
   }
 
