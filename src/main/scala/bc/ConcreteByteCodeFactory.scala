@@ -16,6 +16,7 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
     if(name == "") {
       throw new InvalidBytecodeException("Byte code not known")
     }
+    argsCheck(name, args:_*)
     args.toArray.asInstanceOf[AnyRef]
     if(name != "iconst") {
       println(name)
@@ -23,6 +24,12 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
     } else {
       println(name)
       Class.forName(getClassName(name)).getConstructors()(0).newInstance(args(0).asInstanceOf[AnyRef]).asInstanceOf[ByteCode]
+    }
+  }
+
+  private def argsCheck(name: String, args: Int*) = {
+    if (args.size > 1 && name == "iconst") {
+      throw new InvalidBytecodeException("Too many arguments supplied")
     }
   }
 }

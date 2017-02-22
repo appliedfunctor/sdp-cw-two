@@ -23,5 +23,10 @@ class PublicByteCodeFactorySuite extends FunSuite with ByteCodeValues {
       bcf.make(99)
     }
   }
+  test("Should throw an exception when two or more ints are passed to iconst"){
+    intercept[InvalidBytecodeException]{
+      val bc = bcf.make(bytecode("iconst"), 4, 5)
+    }
+  }
 
 }
