@@ -29,4 +29,10 @@ class PublicByteCodeFactorySuite extends FunSuite with ByteCodeValues {
     }
   }
 
+  test("Should throw an exception when no arguments are passed to iconst"){
+    intercept[InvalidBytecodeException]{
+      val bc = bcf.make(bytecode("iconst"))
+    }
+  }
+
 }

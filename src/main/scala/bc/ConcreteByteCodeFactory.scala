@@ -31,5 +31,8 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
     if (args.size > 1 && name == "iconst") {
       throw new InvalidBytecodeException("Too many arguments supplied")
     }
+    if (args.size == 0 && name == "iconst"){
+      throw new InvalidBytecodeException("No arguments supplied to iconst")
+    }
   }
 }
