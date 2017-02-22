@@ -6,7 +6,7 @@ import vm.VirtualMachine
 /**
   * Created by mmkeri on 22/02/2017.
   */
-class ISwap() extends ByteCode{
+case class iSwap() extends ByteCode{
   override val code: Byte = "iswap".toByte
 
   override def execute(vm: VirtualMachine): VirtualMachine = {
