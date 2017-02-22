@@ -6,8 +6,8 @@ import vm.VirtualMachine
 /**
   * Created by aworton on 22/02/17.
   */
-case class iMul() extends ByteCode{
-  override val code: Byte = "imul".toByte
+case class iMul() extends ByteCode with ByteCodeValues{
+  override val code: Byte = bytecode("imul")
 
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()

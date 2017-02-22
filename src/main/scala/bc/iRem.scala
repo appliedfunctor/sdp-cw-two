@@ -6,8 +6,8 @@ import vm.VirtualMachine
 /**
   * Created by aworton on 22/02/17.
   */
-case class iRem() extends ByteCode{
-  override val code: Byte = "irem".toByte
+case class iRem() extends ByteCode with ByteCodeValues{
+  override val code: Byte = bytecode("irem")
 
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()

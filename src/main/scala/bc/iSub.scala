@@ -6,8 +6,8 @@ import vm.VirtualMachine
 /**
   * Created by aworton on 22/02/17.
   */
-case class iSub() extends ByteCode{
-  override val code: Byte = "isub".toByte
+case class iSub() extends ByteCode with ByteCodeValues{
+  override val code: Byte = bytecode("isub")
 
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
