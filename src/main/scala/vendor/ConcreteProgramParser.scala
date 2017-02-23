@@ -5,7 +5,7 @@ import library.File
 /**
   * Created by aworton on 16/02/17.
   */
-class vendorParser extends ProgramParser{
+class ConcreteProgramParser extends ProgramParser{
   /**
     * Parses a file representation of a bytecode program
     * into an `InstructionList`.
@@ -57,7 +57,7 @@ class vendorParser extends ProgramParser{
     * @param line the input line as a string
     * @return a tuple containing a string for the instruction and a string for the argument
     */
-  def lineDivider(line: String): Tuple2[String, Option[String]] = {
+  private def lineDivider(line: String): Tuple2[String, Option[String]] = {
     val dividedLine = line.split(" ")
 
     dividedLine match {
@@ -72,7 +72,7 @@ class vendorParser extends ProgramParser{
     * @param instructionArgumentPair
     * @return
     */
-  def instructionMaker(instructionArgumentPair: Tuple2[String, Option[String]]):Instruction = {
+  private def instructionMaker(instructionArgumentPair: Tuple2[String, Option[String]]):Instruction = {
     val instructionName = instructionArgumentPair._1
     var argument = Vector[Int](0)
     if(instructionArgumentPair._2 != None){
@@ -86,7 +86,7 @@ class vendorParser extends ProgramParser{
     * @param arg the string value to parse
     * @return the parsed int value
     */
-  def tryToParseArgumentToInt(arg: String): Int ={
+  private def tryToParseArgumentToInt(arg: String): Int ={
     try {
       arg.toInt
     }
