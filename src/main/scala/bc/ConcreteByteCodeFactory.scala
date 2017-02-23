@@ -1,5 +1,5 @@
 package bc
-
+import library.ByteCode.getNameFromByteCode
 /**
   * Created by aworton on 22/02/17.
   */
@@ -12,7 +12,7 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
   }
 
   override def make(byte: Byte, args: Int*): ByteCode = {
-    val name = bytecode.find(pair => pair._2 == byte).map(pair => pair._1).getOrElse("")
+    val name = getNameFromByteCode(byte)
     testName(name)
     argsCheck(name, args:_*)
     args.toArray.asInstanceOf[AnyRef]

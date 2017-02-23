@@ -1,5 +1,4 @@
 package bc
-
 import vm.VirtualMachine
 
 /**
