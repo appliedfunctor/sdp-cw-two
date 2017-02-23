@@ -1,11 +1,12 @@
 package vendor
 
 import library.File
+import bc.{ByteCode, ByteCodeValues, InvalidBytecodeException}
 
 /**
   * Created by aworton on 16/02/17.
   */
-class ConcreteProgramParser extends ProgramParser{
+class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
   /**
     * Parses a file representation of a bytecode program
     * into an `InstructionList`.
@@ -75,10 +76,11 @@ class ConcreteProgramParser extends ProgramParser{
   private def instructionMaker(instructionArgumentPair: Tuple2[String, Option[String]]):Instruction = {
     val instructionName = instructionArgumentPair._1
     var argument = Vector[Int](0)
+    val instructionNameChecked = fileTester(instructionName)
     if(instructionArgumentPair._2 != None){
         argument = Vector(tryToParseArgumentToInt(instructionArgumentPair._2.get))
     }
-    new Instruction(instructionName, argument)
+    new Instruction(instructionNameChecked, argument)
   }
 
   /**
@@ -93,6 +95,14 @@ class ConcreteProgramParser extends ProgramParser{
     catch{
       case e: NumberFormatException => throw new IllegalArgumentException()
     }
+  }
+
+  def fileTester(instruction: String): String = {
+
+      if(!bytecode.contains(instruction))
+        throw new InvalidBytecodeException("String submitted is not a valid instruction")
+      else
+        instruction
   }
 
 }
