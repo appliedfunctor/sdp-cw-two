@@ -76,7 +76,7 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
   private def instructionMaker(instructionArgumentPair: Tuple2[String, Option[String]]):Instruction = {
     val instructionName = instructionArgumentPair._1
     var argument = Vector[Int](0)
-    val instructionNameChecked = fileTester(instructionName)
+    val instructionNameChecked = instructionTester(instructionName)
     if(instructionArgumentPair._2 != None){
         argument = Vector(tryToParseArgumentToInt(instructionArgumentPair._2.get))
     }
@@ -97,7 +97,7 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
     }
   }
 
-  def fileTester(instruction: String): String = {
+  def instructionTester(instruction: String): String = {
 
       if(!bytecode.contains(instruction))
         throw new InvalidBytecodeException("String submitted is not a valid instruction")
