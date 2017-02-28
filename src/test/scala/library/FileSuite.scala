@@ -17,7 +17,7 @@ class FileSuite extends FunSuite {
 
   test("empty file returns empty list"){
     assertThrows[IllegalArgumentException]{
-      File.getLines("programs/p06.vm")
+      File.getLines("programs/p07-blank-file.vm")
     }
   }
 
