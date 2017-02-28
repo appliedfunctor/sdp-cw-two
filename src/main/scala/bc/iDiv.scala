@@ -6,7 +6,7 @@ import vm.VirtualMachine
 /**
   * Created by aworton on 22/02/17.
   */
-case class iDiv() extends ByteCode with ByteCodeValues{
+class iDiv() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("idiv")
 
   override def execute(vm: VirtualMachine): VirtualMachine = {

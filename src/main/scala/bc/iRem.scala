@@ -6,7 +6,7 @@ import vm.VirtualMachine
 /**
   * Created by aworton on 22/02/17.
   */
-case class iRem() extends ByteCode with ByteCodeValues{
+class iRem() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("irem")
 
   override def execute(vm: VirtualMachine): VirtualMachine = {

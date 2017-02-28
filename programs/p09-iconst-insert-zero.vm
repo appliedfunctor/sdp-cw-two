@@ -1,0 +1,6 @@
+iconst 0
+iinc
+iinc
+iconst 4
+imul
+print
