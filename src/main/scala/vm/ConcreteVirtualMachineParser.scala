@@ -10,14 +10,12 @@ class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser:
   override def parse(file: String): Vector[ByteCode] = {
     val instructions = programParser.parse(file)
     val byteVector = parseInstructionsToByteVector(instructions)
-    byteVector.foreach(println(_))
     byteCodeParser.parse(byteVector)
   }
 
   override def parseString(str: String): Vector[ByteCode] = {
     val instructions = programParser.parseString(str)
     val byteVector = parseInstructionsToByteVector(instructions)
-    byteVector.foreach(println(_))
     byteCodeParser.parse(byteVector)
   }
 
