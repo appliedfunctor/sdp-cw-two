@@ -6,7 +6,7 @@ import library.ByteCode.{getPopValue, getPopVirtualMachine}
 /**
   * Created by aworton on 22/02/17.
   */
-case class iAdd() extends ByteCode with ByteCodeValues{
+class iAdd() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("iadd")
 
   override def execute(vm: VirtualMachine): VirtualMachine = {

@@ -21,24 +21,4 @@ class PublicByteCodeParserSuite extends FunSuite with ByteCodeValues {
     assert(bc(1).code == bytecode("iconst"))
     assert(bc(2).code == bytecode("iadd"))
   }
-
-  test("byte code parser throws error on invalid single iconst input"){
-//    val code = Vector(bytecode("iconst"), bytecode("iconst"), 5.toByte)
-//    assertThrows[IllegalArgumentException]{
-//      val bc = bcp.parse(code)
-//    }
-  }
-
-  test("byte code parser throws error on invalid iconst input sequence"){
-
-
-  }
-
-  test("byte code parser throws error on invalid single non-iconst input"){
-
-  }
-
-  test("byte code parser throws error on invalid non-iconst input sequence"){
-
-  }
 }
