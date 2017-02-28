@@ -12,7 +12,7 @@ class iDup() extends ByteCode with ByteCodeValues{
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
 
-    vm.push(getPopValue(firstPop))
+    vm.push(getPopValue(firstPop)).push(getPopValue(firstPop))
   }
 
 }
