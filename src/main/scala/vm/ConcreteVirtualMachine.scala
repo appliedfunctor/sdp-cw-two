@@ -31,8 +31,5 @@ class ConcreteVirtualMachine extends VirtualMachine{
     }
   }
 
-  override def state: Vector[Int] = stack match{
-    case Nil => Vector()
-    case head :: tail => Vector(head)
-  }
+  override def state: Vector[Int] = stack.toVector
 }
