@@ -12,6 +12,8 @@ case class iSwap() extends ByteCode with ByteCodeValues{
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
     val secondPop = getPopVirtualMachine(firstPop).pop()
-    getPopVirtualMachine(secondPop).push(getPopValue(firstPop)).push(getPopValue(secondPop))
+    val firstPush = getPopVirtualMachine(secondPop).push(getPopValue(firstPop))
+    val secondPush = firstPush.push(getPopValue(secondPop))
+    secondPush
   }
 }
