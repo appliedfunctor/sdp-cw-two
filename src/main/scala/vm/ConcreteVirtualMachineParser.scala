@@ -30,6 +30,7 @@ class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser:
 
   def intsToBytes(ints: List[Int]):List[Byte] = ints match {
     case Nil => Nil
+    case 1 :: arg :: tail => 1.toByte :: arg.toByte :: intsToBytes(tail)
     case 0 :: tail => intsToBytes(tail)
     case head :: tail => head.asInstanceOf[Byte] :: intsToBytes(tail)
   }
