@@ -80,7 +80,11 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
   }
 
   test("[2] iInc should work correctly"){
-
+    val bc = vmp.parseString("iconst 5\niinc")
+    var next = vm.executeOne(bc)
+    assert(next._2.state.head == 5)
+    next = next._2.executeOne(next._1)
+    assert(next._2.state.head == 6)
   }
 
   test("[2] iMul should work correctly"){
