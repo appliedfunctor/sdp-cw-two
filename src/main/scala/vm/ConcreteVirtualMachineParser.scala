@@ -21,9 +21,13 @@ class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser:
     byteCodeParser.parse(byteVector)
   }
 
+  /**
+    * map the instructionList and removes any 0 arguments not associated with an iconst instruction
+    * @param instructions Vector of Instructions
+    * @return altered Vector[Instruction]
+    */
   def removeZeros(instructions: Vector[Instruction]):Vector[Instruction] = {
     instructions.map(x => if(x.name != "iconst") { new Instruction(x.name, Vector[Int]())} else {new Instruction(x.name, x.args)})
-    //instructions.map(x => (if x._1 != "iconst") {x._1 +: Vector[Int]()})
   }
 
   /**

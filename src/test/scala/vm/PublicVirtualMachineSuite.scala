@@ -1,12 +1,14 @@
 package vm
 
 import factory.VirtualMachineFactory
-import org.scalatest.FunSuite
+import org.scalatest.{BeforeAndAfter, FunSuite}
 
-class PublicVirtualMachineSuite extends FunSuite {
-  val vmp = VirtualMachineFactory.virtualMachineParser
-  val bcp = VirtualMachineFactory.byteCodeParser
-  val vm  = VirtualMachineFactory.virtualMachine
+class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
+
+    val vmp = VirtualMachineFactory.virtualMachineParser
+    val bcp = VirtualMachineFactory.byteCodeParser
+    val vm = VirtualMachineFactory.virtualMachine
+
 
   test("[10] a virtual machine should execute a program") {
     val bc  = vmp.parse("programs/p05.vm")
@@ -68,7 +70,13 @@ class PublicVirtualMachineSuite extends FunSuite {
   }
 
   test("[2] iDup should work correctly"){
-
+    val bc = vmp.parseString("iconst 5\nidup")
+    var next = vm.executeOne(bc)
+    assert(next._2.state.head == 5)
+    val stateSize = next._2.state.size
+    next = next._2.executeOne(next._1)
+    assert(next._2.state.head == 5)
+    assert(next._2.state.size == stateSize + 1)
   }
 
   test("[2] iInc should work correctly"){
