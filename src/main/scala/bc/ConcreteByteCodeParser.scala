@@ -1,5 +1,6 @@
 package bc
 import library.ByteCode.getNameFromByteCode
+import vendor.InvalidInstructionFormatException
 
 /**
   * Created by mmkeri on 23/02/2017.
@@ -29,9 +30,9 @@ class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
     }
   }
 
-  def validateArgumentExists(bytes: Vector[Byte]): Unit = {
+  private def validateArgumentExists(bytes: Vector[Byte]): Unit = {
     if(bytes.isEmpty){
-      throw new IllegalArgumentException
+      throw new InvalidInstructionFormatException("Expected argument does not exist")
     }
   }
 }

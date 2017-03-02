@@ -2,6 +2,7 @@ package vm
 
 import bc.ByteCodeParser
 import factory.VirtualMachineFactory
+import library.Io
 import org.scalatest.{BeforeAndAfter, FunSuite}
 
 class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
@@ -156,8 +157,17 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
     assert(next._2.state(1) == 2)
   }
 
-  test("[2] iPrint should work correctly"){
+  test("[2] Print should work correctly"){
+    val bc  = vmp.parseString("iconst 1\nprint")
+    var next = vm.execute(bc)
+    assert(Io.lastOutput == 1)
+  }
 
+  test("[2] executeOne doesn't change state and returns the vm"){
+    val input = Vector()
+    var next = vm.executeOne(input)
+    assert(next._2 == vm)
+    assert(next._1 == input)
   }
 
   test("[2] attempting tpo pop from an empty stack should throw a MachineUnderflowException"){

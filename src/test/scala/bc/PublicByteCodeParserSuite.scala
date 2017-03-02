@@ -2,6 +2,7 @@ package bc
 
 import factory.VirtualMachineFactory
 import org.scalatest.{BeforeAndAfter, FunSuite}
+import vendor.InvalidInstructionFormatException
 
 class PublicByteCodeParserSuite extends FunSuite with ByteCodeValues with BeforeAndAfter{
   var bcp: ByteCodeParser  = _
@@ -26,9 +27,9 @@ class PublicByteCodeParserSuite extends FunSuite with ByteCodeValues with Before
     assert(bc(2).code == bytecode("iadd"))
   }
 
-  test("[2] byte code parser should throw an IllegalArgumentException if supplied with an empty argument"){
+  test("[2] byte code parser should throw an InvalidInstructionFormatException if supplied with an empty argument"){
     val code = Vector()
-    assertThrows[IllegalArgumentException] {
+    assertThrows[InvalidInstructionFormatException] {
       bcp.parse(code)
     }
   }

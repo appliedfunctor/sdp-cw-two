@@ -19,20 +19,25 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
     processInstructions(instructions)
   }
 
+  private def verifyInstructionsNotEmpty(instructions: List[String]): Unit = {
+    if (instructions.forall(_.isEmpty)) {
+      throw new InvalidInstructionFormatException("Instruction list is empty")
+    }
+  }
+
   /**
     * Check that instruction is valid (has length and isn't blank)
     * filter out empty instructions
     * extract arguments and produce instructions from data
+    *
     * @param instructions a list of input instructions
     * @return a vector of instantiated instructions
     */
   private def processInstructions(instructions: List[String]): Vector[Instruction] = {
-    if (instructions.length == 1 && instructions.head == "") {
-      throw new InvalidInstructionFormatException("Instruction list is empty")
-    }
+    verifyInstructionsNotEmpty(instructions)
 
     val instructionVector = instructions
-        .filter(line => line != "")
+        .filter(_ != "")
         .map(line => {
           val arguments = lineDivider(line)
           instructionMaker(arguments)
@@ -84,7 +89,7 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
   }
 
   /**
-    * attempt to parse argument to int, throw IllegalArgumentException if fails
+    * attempt to parse argument to int, throw InvalidInstructionFormatException if fails
     * @param arg the string value to parse
     * @return the parsed int value
     */
