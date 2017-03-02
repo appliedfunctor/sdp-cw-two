@@ -45,7 +45,7 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
     assert(next._2.state.head == 0)
   }
 
-  test("iconst shoud work correctly with zero as part of a reverse sequence of instructions"){
+  test("iconst should work correctly with zero as part of a reverse sequence of instructions"){
     val bc  = vmp.parseString("iconst 0\niconst 5")
     var next = vm.executeOne(bc)
     assert(next._2.state.head == 0)
