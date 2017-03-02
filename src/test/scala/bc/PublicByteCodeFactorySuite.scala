@@ -1,14 +1,18 @@
 package bc
 
 import factory.VirtualMachineFactory
-import org.scalatest.FunSuite
+import org.scalatest.{BeforeAndAfter, FunSuite}
 
-class PublicByteCodeFactorySuite extends FunSuite with ByteCodeValues {
-  val bcf = VirtualMachineFactory.byteCodeFactory
+class PublicByteCodeFactorySuite extends FunSuite with ByteCodeValues with BeforeAndAfter{
+  var bcf: ByteCodeFactory  = _
+
+  before{
+    bcf = VirtualMachineFactory.byteCodeFactory
+  }
 
   test("[5] all bytecodes should be made by factory") {
     // Tests that each bytecode (modulo "iconst") can be made.
-    for ((name, code) <- (bytecode - "iconst")) {
+    for ((name, code) <- bytecode - "iconst") {
       val bc = bcf.make(code)
       assert(bc.code == code, "invalid bytecode value")
     }

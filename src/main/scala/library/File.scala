@@ -1,5 +1,9 @@
 package library
 
+import java.io.FileNotFoundException
+
+import vendor.InvalidInstructionFormatException
+
 import scala.io.Source
 
 /**
@@ -9,7 +13,7 @@ object File {
   def getLines(file: String): List[String] = {
     val source = Source.fromFile(file)
     val lines = source.getLines().toList
-    if(lines.forall(_.isEmpty)){ throw new IllegalArgumentException("File either doesn't exist or is empty")} else {lines}
+    if(lines.forall(_.isEmpty)) throw new InvalidInstructionFormatException("Instruction list is empty") else lines
   }
 
 }

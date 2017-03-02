@@ -3,6 +3,7 @@ package library
 import java.io.FileNotFoundException
 
 import org.scalatest.FunSuite
+import vendor.InvalidInstructionFormatException
 
 /**
   * Created by aworton on 16/02/17.
@@ -16,7 +17,7 @@ class FileSuite extends FunSuite {
   }
 
   test("empty file returns empty list"){
-    assertThrows[IllegalArgumentException]{
+    assertThrows[InvalidInstructionFormatException]{
       File.getLines("programs/p07-blank-file.vm")
     }
   }

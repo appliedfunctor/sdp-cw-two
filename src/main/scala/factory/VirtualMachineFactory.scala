@@ -10,18 +10,13 @@ import vm.{ConcreteVirtualMachine, ConcreteVirtualMachineParser, VirtualMachine,
   * implement each method such that it returns an object of the correct type.
   */
 object VirtualMachineFactory {
-  // TODO
   def byteCodeFactory: ByteCodeFactory = new ConcreteByteCodeFactory
 
-  // TODO
   def vendorParser: ProgramParser = new ConcreteProgramParser
 
-  // TODO
   def byteCodeParser: ByteCodeParser = new ConcreteByteCodeParser
 
-  // TODO
   def virtualMachineParser: VirtualMachineParser = new ConcreteVirtualMachineParser(vendorParser, byteCodeParser)
 
-  // TODO
   def virtualMachine: VirtualMachine = new ConcreteVirtualMachine
 }

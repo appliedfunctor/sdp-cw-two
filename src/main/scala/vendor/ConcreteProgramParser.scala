@@ -27,8 +27,8 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
     * @return a vector of instantiated instructions
     */
   private def processInstructions(instructions: List[String]): Vector[Instruction] = {
-    if (instructions.length == 1 && instructions(0) == "") {
-      throw new IllegalArgumentException
+    if (instructions.length == 1 && instructions.head == "") {
+      throw new InvalidInstructionFormatException("Instruction list is empty")
     }
 
     val instructionVector = instructions
@@ -62,22 +62,22 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
     val dividedLine = line.split(" ")
 
     dividedLine match {
-      case dl:Array[String] if(dl.length == 1) => Tuple2(dl(0), None)
-      case dl:Array[String] if(dl.length == 2) => Tuple2(dl(0), Some(dl(1)))
-      case dl:Array[String] if(dl.length > 2) => throw new IllegalArgumentException
+      case dl:Array[String] if dl.length == 1 => Tuple2(dl(0), None)
+      case dl:Array[String] if dl.length == 2 => Tuple2(dl(0), Some(dl(1)))
+      case dl:Array[String] if dl.length > 2 => throw new InvalidInstructionFormatException("Instruction has too many parameters")
     }
   }
 
   /**
     * Produce instructions from a pair of instruction, optional argument tuple
-    * @param instructionArgumentPair
-    * @return
+    * @param instructionArgumentPair is a tuple holding (instruction, Option[argument])
+    * @return instruction
     */
   private def instructionMaker(instructionArgumentPair: Tuple2[String, Option[String]]):Instruction = {
     val instructionName = instructionArgumentPair._1
     var argument = Vector[Int](0)
     val instructionNameChecked = instructionTester(instructionName)
-    if(instructionArgumentPair._2 != None){
+    if(instructionArgumentPair._2.isDefined){
         argument = Vector(tryToParseArgumentToInt(instructionArgumentPair._2.get))
     }
     new Instruction(instructionNameChecked, argument)
@@ -88,21 +88,20 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
     * @param arg the string value to parse
     * @return the parsed int value
     */
-  private def tryToParseArgumentToInt(arg: String): Int ={
+  private def tryToParseArgumentToInt(arg: String): Int = {
     try {
       arg.toInt
     }
     catch{
-      case e: NumberFormatException => throw new IllegalArgumentException()
+      case e: NumberFormatException => throw new InvalidInstructionFormatException("Argument is not a valid number")
     }
   }
 
   def instructionTester(instruction: String): String = {
-
-      if(!bytecode.contains(instruction))
+      if(!bytecode.contains(instruction)) {
         throw new InvalidBytecodeException("String submitted is not a valid instruction")
-      else
-        instruction
+      }
+      instruction
   }
 
 }

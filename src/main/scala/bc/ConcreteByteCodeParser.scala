@@ -15,20 +15,23 @@ class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
     * @return a vector of `ByteCode` objects
     */
   override def parse(bc: Vector[Byte]): Vector[ByteCode] = {
-
     var iconst = false
-    if(bc.length == 0){
-      throw new IllegalArgumentException
-    }
+    validateArgumentExists(bc)
     bytesToInstructions(bc.toList).toVector
   }
 
   def bytesToInstructions(bc: List[Byte]): List[ByteCode] = {
-    val bcf = new ConcreteByteCodeFactory()
-    bc.toList match {
+    val factory = new ConcreteByteCodeFactory()
+    bc match {
       case Nil => Nil
-      case instruction :: value :: tail if(instruction == bytecode("iconst")) => bcf.make(instruction, value.toInt) :: bytesToInstructions(tail)
-      case instruction :: tail => bcf.make(instruction) :: bytesToInstructions(tail)
+      case instruction :: value :: tail if instruction == bytecode("iconst") => factory.make(instruction, value.toInt) :: bytesToInstructions(tail)
+      case instruction :: tail => factory.make(instruction) :: bytesToInstructions(tail)
+    }
+  }
+
+  def validateArgumentExists(bytes: Vector[Byte]): Unit = {
+    if(bytes.isEmpty){
+      throw new IllegalArgumentException
     }
   }
 }

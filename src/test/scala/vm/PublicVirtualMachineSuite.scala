@@ -1,14 +1,18 @@
 package vm
 
+import bc.ByteCodeParser
 import factory.VirtualMachineFactory
 import org.scalatest.{BeforeAndAfter, FunSuite}
 
 class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
+  var bcp: ByteCodeParser  = _
+  val vmp: VirtualMachineParser = VirtualMachineFactory.virtualMachineParser
+  var vm: VirtualMachine = _
 
-    val vmp = VirtualMachineFactory.virtualMachineParser
-    val bcp = VirtualMachineFactory.byteCodeParser
-    val vm = VirtualMachineFactory.virtualMachine
-
+  before{
+    bcp = VirtualMachineFactory.byteCodeParser
+    vm = VirtualMachineFactory.virtualMachine
+  }
 
   test("[10] a virtual machine should execute a program") {
     val bc  = vmp.parse("programs/p05.vm")
@@ -154,5 +158,12 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
 
   test("[2] iPrint should work correctly"){
 
+  }
+
+  test("[2] attempting tpo pop from an empty stack should throw a MachineUnderflowException"){
+    val bc  = vmp.parseString("iswap")
+    assertThrows[MachineUnderflowException]{
+      vm.executeOne(bc)
+    }
   }
 }

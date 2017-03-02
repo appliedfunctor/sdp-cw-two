@@ -1,10 +1,14 @@
 package bc
 
 import factory.VirtualMachineFactory
-import org.scalatest.FunSuite
+import org.scalatest.{BeforeAndAfter, FunSuite}
 
-class PublicByteCodeParserSuite extends FunSuite with ByteCodeValues {
-  val bcp = VirtualMachineFactory.byteCodeParser
+class PublicByteCodeParserSuite extends FunSuite with ByteCodeValues with BeforeAndAfter{
+  var bcp: ByteCodeParser  = _
+
+  before{
+    bcp = VirtualMachineFactory.byteCodeParser
+  }
 
   test("[2] byte code parser should parse a single bytecode") {
     val code = Vector(bytecode("iadd"))
@@ -20,5 +24,12 @@ class PublicByteCodeParserSuite extends FunSuite with ByteCodeValues {
     assert(bc(0).code == bytecode("iconst"))
     assert(bc(1).code == bytecode("iconst"))
     assert(bc(2).code == bytecode("iadd"))
+  }
+
+  test("[2] byte code parser should throw an IllegalArgumentException if supplied with an empty argument"){
+    val code = Vector()
+    assertThrows[IllegalArgumentException] {
+      bcp.parse(code)
+    }
   }
 }
