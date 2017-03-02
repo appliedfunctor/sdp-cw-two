@@ -42,6 +42,32 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
     assert(vm2.state.head == 0)
   }
 
+  test("[2] iconst should work for largest value byte holds") {
+    val bc  = vmp.parseString("iconst " + Byte.MaxValue)
+    val (bc2, vm2) = vm.executeOne(bc)
+    assert(vm2.state.head == 127)
+  }
+
+  test("[2] iconst should throw ArgumentOverflowException with argument larger than byte holds") {
+    val bc  = vmp.parseString("iconst " + (Byte.MaxValue + 1))
+    assertThrows[ArgumentOverflowException]{
+      vm.execute(bc)
+    }
+  }
+
+  test("[2] iconst should work for smallest value byte holds") {
+    val bc  = vmp.parseString("iconst " + Byte.MinValue)
+    val (bc2, vm2) = vm.executeOne(bc)
+    assert(vm2.state.head == Byte.MinValue)
+  }
+
+  test("[2] iconst should throw ArgumentUnderflowException with argument smaller than byte holds") {
+    val bc  = vmp.parseString("iconst " + (Byte.MinValue - 1))
+    assertThrows[ArgumentUnderflowException]{
+      vm.execute(bc)
+    }
+  }
+
   test("iconst shoud work correctly with zero as part of a sequence of instructions"){
     val bc  = vmp.parseString("iconst 5\niconst 0")
     var next = vm.executeOne(bc)
@@ -64,6 +90,16 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
     assert(next._2.state.head == 10)
     next = next._2.executeOne(next._1)
     assert(next._2.state.head == 9)
+  }
+
+  test("[2] iDec should work correctlypassing the 0 boundary"){
+    val bc  = vmp.parseString("iconst 1\nidec\nidec")
+    var next = vm.executeOne(bc)
+    assert(next._2.state.head == 1)
+    next = next._2.executeOne(next._1)
+    assert(next._2.state.head == 0)
+    next = next._2.executeOne(next._1)
+    assert(next._2.state.head == -1)
   }
 
   test("[2] iDiv should work correctly"){
@@ -118,12 +154,20 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
     assert(next._2.state.head == 10)
   }
 
-  test("[2] iNeg should work correctly"){
+  test("[2] iNeg should work correctly from pos to neg"){
     val bc = vmp.parseString("iconst 5\nineg")
     var next = vm.executeOne(bc)
     assert(next._2.state.head == 5)
     next = next._2.executeOne(next._1)
     assert(next._2.state.head == -5)
+  }
+
+  test("[2] iNeg should work correctly from neg to pos"){
+    val bc = vmp.parseString("iconst -5\nineg")
+    var next = vm.executeOne(bc)
+    assert(next._2.state.head == -5)
+    next = next._2.executeOne(next._1)
+    assert(next._2.state.head == 5)
   }
 
   test("[2] iRem should work correctly"){
