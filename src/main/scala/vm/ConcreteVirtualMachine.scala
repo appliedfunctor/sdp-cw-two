@@ -9,7 +9,9 @@ class ConcreteVirtualMachine extends VirtualMachine{
   private var stack: List[Int] = Nil
 
   /**
-    * {@inheritDoc}
+    * Execute the sequence of ByteCode by calling the execute method on each in turn
+    * @param bc the supplied vector of ByteCode (instructions)
+    * @return the resultant virtual machine after execution
     */
   override def execute(bc: Vector[ByteCode]): VirtualMachine = {
     bc.foreach(_.execute(this))
@@ -17,7 +19,9 @@ class ConcreteVirtualMachine extends VirtualMachine{
   }
 
   /**
-    * {@inheritDoc}
+    * Execute the first instruction only in the supplied sequence of ByteCode
+    * @param bc the supplied vector of ByteCode (instructions)
+    * @return a tuple of remaining bytecode and the resultant virtual machine after execution
     */
   override def executeOne(bc: Vector[ByteCode]): (Vector[ByteCode], VirtualMachine) = bc.toList match{
     case instruction :: tail => (tail.toVector, execute(Vector(instruction)))
@@ -25,7 +29,9 @@ class ConcreteVirtualMachine extends VirtualMachine{
   }
 
   /**
-    * {@inheritDoc}
+    * Push the supplied value onto the virtual machine stack
+    * @param value the supplied integer value
+    * @return the resuktant virtual machine
     */
   override def push(value: Int): VirtualMachine = {
     stack = value :: stack
@@ -33,7 +39,9 @@ class ConcreteVirtualMachine extends VirtualMachine{
   }
 
   /**
-    * {@inheritDoc}
+    * Pop the value at the top of the virtual machine stack and return it and the resultant
+    * virtual machine
+    * @return a tuple holding the value and the resultant virtual machine
     */
   override def pop(): (Int, VirtualMachine) = stack match {
     case Nil => throw new MachineUnderflowException("Cannot pop from an empty stack")
@@ -43,5 +51,9 @@ class ConcreteVirtualMachine extends VirtualMachine{
     }
   }
 
+  /**
+    * Get the stack as a vector of ints
+    * @return the stack
+    */
   override def state: Vector[Int] = stack.toVector
 }

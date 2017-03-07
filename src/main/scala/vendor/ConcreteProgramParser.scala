@@ -19,6 +19,10 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
     processInstructions(instructions)
   }
 
+  /**
+    * Verify that the supplied instructions are not empty
+    * @param instructions supplied instructions as a list of strings
+    */
   private def verifyInstructionsNotEmpty(instructions: List[String]): Unit = {
     if (instructions.forall(_.isEmpty)) {
       throw new InvalidInstructionFormatException("Instruction list is empty")
@@ -81,7 +85,7 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
   private def instructionMaker(instructionArgumentPair: Tuple2[String, Option[String]]):Instruction = {
     val instructionName = instructionArgumentPair._1
     var argument = Vector[Int](0)
-    val instructionNameChecked = instructionTester(instructionName)
+    val instructionNameChecked = validateInstructionIsKnown(instructionName)
     if(instructionArgumentPair._2.isDefined){
         argument = Vector(tryToParseArgumentToInt(instructionArgumentPair._2.get))
     }
@@ -102,7 +106,12 @@ class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
     }
   }
 
-  def instructionTester(instruction: String): String = {
+  /**
+    * test that the supplied instruction is known
+    * @param instruction the supplied instruction
+    * @return
+    */
+  def validateInstructionIsKnown(instruction: String): String = {
       if(!bytecode.contains(instruction)) {
         throw new InvalidBytecodeException("String submitted is not a valid instruction")
       }

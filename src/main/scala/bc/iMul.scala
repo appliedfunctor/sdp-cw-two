@@ -8,9 +8,7 @@ import vm.VirtualMachine
   */
 class iMul() extends ByteCode with ByteCodeValues{
 
-  /**
-    * {@inheritDoc}
-    */
+  /** @see [[ByteCode.code]] */
   override val code: Byte = bytecode("imul")
 
   /**

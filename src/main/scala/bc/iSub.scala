@@ -8,9 +8,7 @@ import vm.VirtualMachine
   */
 class iSub() extends ByteCode with ByteCodeValues{
 
-  /**
-    * {@inheritDoc}
-    */
+  /** @see [[ByteCode.code]] */
   override val code: Byte = bytecode("isub")
 
   /**

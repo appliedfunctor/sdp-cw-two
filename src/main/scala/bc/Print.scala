@@ -9,9 +9,7 @@ import library.Io
   */
 class Print() extends ByteCode{
 
-  /**
-    * {@inheritDoc}
-    */
+  /** @see [[ByteCode.code]] */
   override val code: Byte = bytecode("print")
 
   /**

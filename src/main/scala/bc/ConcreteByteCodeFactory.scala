@@ -18,9 +18,7 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
     case n: String => "bc." + n.capitalize
   }
 
-  /**
-    * {@inheritDoc}
-    */
+  /** @see [[ByteCodeFactory.make]] */
   override def make(byte: Byte, args: Int*): ByteCode = {
     val name = getNameFromByteCode(byte)
     testName(name)
