@@ -26,6 +26,16 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
     testName(name)
     argsCheck(name, args:_*)
     args.toArray.asInstanceOf[AnyRef]
+    instantiateByteCode(name, args:_*)
+  }
+
+  /**
+    * Instantiates and returns the instantiation of a ByteCode
+    * @param name the name of the ByteCode
+    * @param args the arguments for the instruction
+    * @return the istantiated bytecode
+    */
+  private def instantiateByteCode(name: String, args: Int*): ByteCode = {
     if(name != IConst) {
       Class.forName(getClassName(name)).getConstructors()(0).newInstance().asInstanceOf[ByteCode]
     } else {
