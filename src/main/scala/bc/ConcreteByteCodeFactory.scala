@@ -5,9 +5,13 @@ import library.ByteCode.getNameFromByteCode
   */
 class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
 
+  private final val IConst = "iconst"
+
   /**
-    *
-    * {include
+    * Perform capitalisation on the name. If the instruction begins with i, capitalise the second letter
+    * otherwise capitalise the whole name.
+    * @param name the input name
+    * @return
     */
   def getClassName(name: String): String = name match{
     case n: String if(n(0) == 'i') => "bc." + n(0) + n.substring(1).capitalize
@@ -22,24 +26,35 @@ class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
     testName(name)
     argsCheck(name, args:_*)
     args.toArray.asInstanceOf[AnyRef]
-    if(name != "iconst") {
+    if(name != IConst) {
       Class.forName(getClassName(name)).getConstructors()(0).newInstance().asInstanceOf[ByteCode]
     } else {
       Class.forName(getClassName(name)).getConstructors()(0).newInstance(args(0).asInstanceOf[AnyRef]).asInstanceOf[ByteCode]
     }
   }
 
+  /**
+    * validate that name is not empty
+    * throw an InvalidBytecodeException if it is
+    * @param name the supplied instruction name
+    */
   private def testName(name: String) = {
-    if (name == "") {
+    if (name.isEmpty) {
       throw new InvalidBytecodeException("Byte code not known")
     }
   }
 
+  /**
+    * Validate arguments. Ensure that only iconst instructions have arguments
+    * throw InvalidBytecodeException if this is not the case
+    * @param name the supplied instruction name
+    * @param args the supplied arguments
+    */
   private def argsCheck(name: String, args: Int*) = {
-    if (args.size > 1 && name == "iconst") {
+    if (args.size > 1 && name == IConst) {
       throw new InvalidBytecodeException("Too many arguments supplied")
     }
-    if (args.size == 0 && name == "iconst"){
+    if (args.size == 0 && name == IConst){
       throw new InvalidBytecodeException("No arguments supplied to iconst")
     }
   }
