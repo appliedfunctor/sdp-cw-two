@@ -7,6 +7,9 @@ import vendor.{Instruction, ProgramParser}
   */
 class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser: ByteCodeParser) extends VirtualMachineParser with ByteCodeValues {
 
+  /**
+    * {@inheritDoc}
+    */
   override def parse(file: String): Vector[ByteCode] = {
     val instructions = programParser.parse(file)
     val alteredInstructions = removeZeros(instructions)//added code. Untested yet
@@ -14,6 +17,9 @@ class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser:
     byteCodeParser.parse(byteVector)
   }
 
+  /**
+    * {@inheritDoc}
+    */
   override def parseString(str: String): Vector[ByteCode] = {
     val instructions = programParser.parseString(str)
     val alteredInstructions = removeZeros(instructions)//added code. Untested yet

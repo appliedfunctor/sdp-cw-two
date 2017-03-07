@@ -5,12 +5,18 @@ import library.ByteCode.getNameFromByteCode
   */
 class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
 
-
+  /**
+    *
+    * {include
+    */
   def getClassName(name: String): String = name match{
     case n: String if(n(0) == 'i') => "bc." + n(0) + n.substring(1).capitalize
     case n: String => "bc." + n.capitalize
   }
 
+  /**
+    * {@inheritDoc}
+    */
   override def make(byte: Byte, args: Int*): ByteCode = {
     val name = getNameFromByteCode(byte)
     testName(name)
