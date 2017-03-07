@@ -4,7 +4,9 @@ import library.ByteCode.{getPopValue, getPopVirtualMachine}
 import vm.VirtualMachine
 
 /**
-  * Created by aworton on 22/02/17.
+  * Implements a concrete [[ByteCode]] Instruction
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 class iDiv() extends ByteCode with ByteCodeValues{
 

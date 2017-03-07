@@ -3,9 +3,11 @@ package bc
 import vendor.InvalidInstructionFormatException
 
 /**
-  * Created by mmkeri on 23/02/2017.
+  * Implements a concrete [[ByteCodeParser]]
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
-class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
+class ConcreteByteCodeParser extends ByteCodeParser with ByteCodeValues {
   /**
     * Parses a vector of `Byte` into a vector of `ByteCode`.
     *

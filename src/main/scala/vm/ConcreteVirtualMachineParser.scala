@@ -1,9 +1,10 @@
 package vm
 import bc.{ByteCode, ByteCodeParser, ByteCodeValues}
 import vendor.{Instruction, ProgramParser}
-
 /**
-  * Created by aworton on 23/02/17.
+  * Implements a [[VirtualMachineParser]]
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser: ByteCodeParser) extends VirtualMachineParser with ByteCodeValues {
 
@@ -74,7 +75,8 @@ class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser:
   }
 
 }
-//exception definition for argument overflow condition (int to byte)
+/** Represents an exception that can be thrown if an argument experiences an overflow condition */
 class ArgumentOverflowException(message: String) extends Exception(message)
-//exception definition for argument underflow condition (int to byte)
+
+/** Represents an exception that can be thrown if an argument experiences an underflow condition */
 class ArgumentUnderflowException(message: String) extends Exception(message)

@@ -2,7 +2,9 @@ package bc
 import vm.VirtualMachine
 
 /**
-  * Created by aworton on 22/02/17.
+  * Implements a concrete [[ByteCode]] Instruction
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 class iConst(num: Int) extends ByteCode with ByteCodeValues{
 

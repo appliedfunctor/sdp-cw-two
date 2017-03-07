@@ -4,7 +4,9 @@ import library.File
 import bc.{ByteCodeValues, InvalidBytecodeException}
 
 /**
-  * Created by aworton on 16/02/17.
+  * Implements a [[ProgramParser]]
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 class ConcreteProgramParser extends ProgramParser with ByteCodeValues {
   /**

@@ -1,7 +1,9 @@
 package bc
 import library.ByteCode.getNameFromByteCode
 /**
-  * Created by aworton on 22/02/17.
+  * Implements a concrete [[ByteCodeFactory]]
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 class ConcreteByteCodeFactory extends ByteCodeFactory with ByteCodeValues{
 

@@ -1,7 +1,9 @@
 package library
 
 /**
-  * Created by aworton on 02/03/17.
+  * A helper class to provide methods relating to Io operations.
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 object Io {
 

@@ -4,7 +4,9 @@ import bc.ByteCodeValues
 import vm.VirtualMachine
 
 /**
-  * Created by aworton on 22/02/17.
+  * A helper class to provide methods relating to ByteCode operations.
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 object ByteCode extends ByteCodeValues {
 

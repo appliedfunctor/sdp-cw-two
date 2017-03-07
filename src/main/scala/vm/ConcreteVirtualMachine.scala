@@ -2,7 +2,9 @@ package vm
 import bc.ByteCode
 
 /**
-  * Created by aworton on 23/02/17.
+  * Implements a [[VirtualMachine]]
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 class ConcreteVirtualMachine extends VirtualMachine{
 

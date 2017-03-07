@@ -5,7 +5,9 @@ import library.ByteCode.{getPopValue, getPopVirtualMachine}
 import library.Io
 
 /**
-  * Created by mmkeri on 22/02/2017.
+  * Implements a concrete [[ByteCode]] Instruction
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 class Print() extends ByteCode{
 

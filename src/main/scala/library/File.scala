@@ -5,7 +5,9 @@ import vendor.InvalidInstructionFormatException
 import scala.io.Source
 
 /**
-  * Created by aworton on 16/02/17.
+  * A helper class to provide methods relating to File operations.
+  * @author Matthew Keri
+  * @author Alexander Worton
   */
 object File {
 
