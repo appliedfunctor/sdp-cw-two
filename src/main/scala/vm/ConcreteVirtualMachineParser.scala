@@ -45,11 +45,24 @@ class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser:
     instructions.flatMap(instruction => bytecode(instruction.name) :: intsToBytes(instruction.args.toList))
   }
 
-  private def intsToBytes(ints: List[Int]):List[Byte] = ints match {
+  /**
+    * Parse each integer and convert to byte
+    * @param ints the supplied list on integers
+    * @return the processed byte list
+    */
+  private def intsToBytes(ints: List[Int]): List[Byte] = ints match {
     case Nil => Nil
     case head :: tail => validateAndConvertToByte(head) :: intsToBytes(tail)
   }
 
+  /**
+    * validate the supplied integer to check for overflow and underflow conditions
+    * when converting from integer.
+    * throw an ArgumentOverflowException if an overflow occurs
+    * throw an ArgumentUnderflowException if an underflow occurs
+    * @param argument the integer argument
+    * @return the parsed byte
+    */
   private def validateAndConvertToByte(argument: Int): Byte = argument match{
     case arg: Int if(arg > Byte.MaxValue) => throw new ArgumentOverflowException("Value greater than byte can hold. Overflow would occur")
     case arg: Int if(arg < Byte.MinValue) => throw new ArgumentUnderflowException("Value lower than byte can hold. Underflow would occur")
