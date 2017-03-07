@@ -1,6 +1,6 @@
 package bc
 
-import library.ByteCode.{getPopValue, getPopVirtualMachine}
+import library.ByteCode.{getPopValue}
 import vm.VirtualMachine
 
 /**

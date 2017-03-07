@@ -1,7 +1,7 @@
 package vendor
 
 import library.File
-import bc.{ByteCode, ByteCodeValues, InvalidBytecodeException}
+import bc.{ByteCodeValues, InvalidBytecodeException}
 
 /**
   * Created by aworton on 16/02/17.
