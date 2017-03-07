@@ -1,7 +1,5 @@
 package library
 
-import java.io.FileNotFoundException
-
 import vendor.InvalidInstructionFormatException
 
 import scala.io.Source

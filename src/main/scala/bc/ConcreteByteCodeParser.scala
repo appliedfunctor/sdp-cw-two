@@ -1,5 +1,5 @@
 package bc
-import library.ByteCode.getNameFromByteCode
+
 import vendor.InvalidInstructionFormatException
 
 /**
