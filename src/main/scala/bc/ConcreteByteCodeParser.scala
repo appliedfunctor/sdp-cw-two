@@ -17,7 +17,7 @@ class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
     */
   override def parse(bc: Vector[Byte]): Vector[ByteCode] = {
     var iconst = false
-    validateArgumentExists(bc)
+    validateVectorNotEmpty(bc)
     bytesToInstructions(bc.toList).toVector
   }
 
@@ -39,7 +39,7 @@ class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
     * validate the supplied vector to ensure that it is not empty
     * @param bytes the supplied byte vector
     */
-  private def validateArgumentExists(bytes: Vector[Byte]): Unit = {
+  private def validateVectorNotEmpty(bytes: Vector[Byte]): Unit = {
     if(bytes.isEmpty){
       throw new InvalidInstructionFormatException("Expected argument does not exist")
     }
