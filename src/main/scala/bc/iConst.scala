@@ -5,6 +5,10 @@ import vm.VirtualMachine
   * Created by aworton on 22/02/17.
   */
 class iConst(num: Int) extends ByteCode with ByteCodeValues{
+
+  /**
+    * {@inheritDoc}
+    */
   override val code: Byte = bytecode("iconst")
 
   /**

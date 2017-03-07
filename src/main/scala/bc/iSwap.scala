@@ -7,6 +7,10 @@ import vm.VirtualMachine
   * Created by mmkeri on 22/02/2017.
   */
 class iSwap() extends ByteCode with ByteCodeValues{
+
+  /**
+    * {@inheritDoc}
+    */
   override val code: Byte = bytecode("iswap")
 
   /**

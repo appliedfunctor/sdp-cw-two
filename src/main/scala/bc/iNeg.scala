@@ -7,6 +7,10 @@ import vm.VirtualMachine
   * Created by aworton on 22/02/17.
   */
 class iNeg() extends ByteCode with ByteCodeValues{
+
+  /**
+    * {@inheritDoc}
+    */
   override val code: Byte = bytecode("ineg")
 
   /**
@@ -16,7 +20,6 @@ class iNeg() extends ByteCode with ByteCodeValues{
     */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
-
     getPopVirtualMachine(firstPop).push(-getPopValue(firstPop))
   }
 }

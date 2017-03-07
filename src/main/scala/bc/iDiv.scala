@@ -7,6 +7,10 @@ import vm.VirtualMachine
   * Created by aworton on 22/02/17.
   */
 class iDiv() extends ByteCode with ByteCodeValues{
+
+  /**
+    * {@inheritDoc}
+    */
   override val code: Byte = bytecode("idiv")
 
   /**

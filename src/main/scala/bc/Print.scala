@@ -8,6 +8,10 @@ import library.Io
   * Created by mmkeri on 22/02/2017.
   */
 class Print() extends ByteCode{
+
+  /**
+    * {@inheritDoc}
+    */
   override val code: Byte = bytecode("print")
 
   /**
@@ -16,7 +20,7 @@ class Print() extends ByteCode{
     * @return the updated virtual machine
     */
   override def execute(vm: VirtualMachine): VirtualMachine = {
-    var valueVmTuple = vm.pop()
+    val valueVmTuple = vm.pop()
     Io.output(getPopValue(valueVmTuple))
     getPopVirtualMachine(valueVmTuple)
   }
