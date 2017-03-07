@@ -10,6 +10,11 @@ import library.Io
 class Print() extends ByteCode{
   override val code: Byte = bytecode("print")
 
+  /**
+    * Pop the top value from the VirtualMachine stack and print it
+    * @param vm the virtual machine
+    * @return the updated virtual machine
+    */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     var valueVmTuple = vm.pop()
     Io.output(getPopValue(valueVmTuple))

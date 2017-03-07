@@ -9,6 +9,12 @@ import vm.VirtualMachine
 class iRem() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("irem")
 
+  /**
+    * Pop the top two values from the VirtualMachine stack, modulo the first by the
+    * second and push the result
+    * @param vm the virtual machine
+    * @return the updated virtual machine
+    */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
     val secondPop = getPopVirtualMachine(firstPop).pop()

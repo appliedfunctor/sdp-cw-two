@@ -9,6 +9,11 @@ import vm.VirtualMachine
 class iMul() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("imul")
 
+  /**
+    * Pop the top two values from the VirtualMachine stack, multiply them and push the result
+    * @param vm the virtual machine
+    * @return the updated virtual machine
+    */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
     val secondPop = getPopVirtualMachine(firstPop).pop()

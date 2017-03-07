@@ -9,6 +9,11 @@ import library.ByteCode.{getPopValue, getPopVirtualMachine}
 class iAdd() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("iadd")
 
+  /**
+    * Pop the top two values from the VirtualMachine stack, sum them and push the result
+    * @param vm the virtual machine
+    * @return the updated virtual machine
+    */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
     val secondPop = getPopVirtualMachine(firstPop).pop()

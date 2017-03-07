@@ -9,6 +9,11 @@ import vm.VirtualMachine
 class iDec() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("idec")
 
+  /**
+    * Pop the top value from the VirtualMachine stack, decrement it and push the result
+    * @param vm the virtual machine
+    * @return the updated virtual machine
+    */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
 

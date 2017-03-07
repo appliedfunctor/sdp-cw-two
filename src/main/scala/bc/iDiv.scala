@@ -9,6 +9,12 @@ import vm.VirtualMachine
 class iDiv() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("idiv")
 
+  /**
+    * Pop the top two values from the VirtualMachine stack, divide the first by the second
+    * and push the result
+    * @param vm the virtual machine
+    * @return the updated virtual machine
+    */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
     val secondPop = getPopVirtualMachine(firstPop).pop()

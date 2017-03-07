@@ -9,6 +9,11 @@ import vm.VirtualMachine
 class iSwap() extends ByteCode with ByteCodeValues{
   override val code: Byte = bytecode("iswap")
 
+  /**
+    * Pop the top two values from the VirtualMachine stack, push them back in reverse order
+    * @param vm the virtual machine
+    * @return the updated virtual machine
+    */
   override def execute(vm: VirtualMachine): VirtualMachine = {
     val firstPop = vm.pop()
     val secondPop = getPopVirtualMachine(firstPop).pop()
