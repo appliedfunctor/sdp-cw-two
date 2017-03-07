@@ -21,6 +21,11 @@ class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
     bytesToInstructions(bc.toList).toVector
   }
 
+  /**
+    * Perfroms recursive parsing of bytes into instructions (bytecode)
+    * @param bc the list of bytes
+    * @return the list of parsed bytecode instructions
+    */
   def bytesToInstructions(bc: List[Byte]): List[ByteCode] = {
     val factory = new ConcreteByteCodeFactory()
     bc match {
@@ -30,6 +35,10 @@ class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
     }
   }
 
+  /**
+    * validate the supplied vector to ensure that it is not empty
+    * @param bytes the supplied byte vector
+    */
   private def validateArgumentExists(bytes: Vector[Byte]): Unit = {
     if(bytes.isEmpty){
       throw new InvalidInstructionFormatException("Expected argument does not exist")
