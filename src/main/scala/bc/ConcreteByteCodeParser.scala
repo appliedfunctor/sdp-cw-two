@@ -22,7 +22,7 @@ class ConcreteByteCodeParser extends ByteCodeValues with ByteCodeParser {
   }
 
   /**
-    * Perfroms recursive parsing of bytes into instructions (bytecode)
+    * Performs recursive parsing of bytes into instructions (bytecode)
     * @param bc the list of bytes
     * @return the list of parsed bytecode instructions
     */
