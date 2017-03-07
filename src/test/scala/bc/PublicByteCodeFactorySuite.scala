@@ -38,8 +38,4 @@ class PublicByteCodeFactorySuite extends FunSuite with ByteCodeValues with Befor
       val bc = bcf.make(bytecode("iconst"))
     }
   }
-//  test("Should throw an exception if the argument to iconst is greater than 128"){
-//
-//  }
-
 }

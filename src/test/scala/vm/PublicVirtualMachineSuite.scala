@@ -49,9 +49,8 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
   }
 
   test("[2] iconst should throw ArgumentOverflowException with argument larger than byte holds") {
-    val bc  = vmp.parseString("iconst " + (Byte.MaxValue + 1))
-    assertThrows[ArgumentOverflowException]{
-      vm.execute(bc)
+   assertThrows[ArgumentOverflowException]{
+        val bc  = vmp.parseString("iconst " + (Byte.MaxValue + 1))
     }
   }
 
@@ -62,9 +61,8 @@ class PublicVirtualMachineSuite extends FunSuite with BeforeAndAfter {
   }
 
   test("[2] iconst should throw ArgumentUnderflowException with argument smaller than byte holds") {
-    val bc  = vmp.parseString("iconst " + (Byte.MinValue - 1))
     assertThrows[ArgumentUnderflowException]{
-      vm.execute(bc)
+      val bc  = vmp.parseString("iconst " + (Byte.MinValue - 1))
     }
   }
 
