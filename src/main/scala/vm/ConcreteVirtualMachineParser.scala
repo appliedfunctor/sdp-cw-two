@@ -57,6 +57,7 @@ class ConcreteVirtualMachineParser(programParser: ProgramParser, byteCodeParser:
   }
 
 }
-
+//exception definition for argument overflow condition (int to byte)
 class ArgumentOverflowException(message: String) extends Exception(message)
+//exception definition for argument underflow condition (int to byte)
 class ArgumentUnderflowException(message: String) extends Exception(message)
